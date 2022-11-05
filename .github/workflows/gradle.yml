@@ -57,5 +57,5 @@ jobs:
           key: ${{ secrets.KEY }}
           script: |
             sudo docker rm -f $(docker ps -qa)
-            sudo docker pull roomdoor/bepo-test
-            sudo docker run --name bepo-test -p 8080:8080 roomdoor/bepo-test
+            sudo docker pull roomdoor/bepo-test:latest
+            sudo docker run --name bepo-test -p 8080:8080 roomdoor/bepo-test:latest
