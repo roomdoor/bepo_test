@@ -16,5 +16,9 @@ RUN chmod +x ./gradlew
 RUN ./gradlew bootJar
 
 FROM openjdk:11
-COPY build/libs/*.jar bepoTest-0.0.1-SNAPSHOT.jar
-ENTRYPOINT ["java","-jar","bepoTest.jar"]
+# builder 이미지에서 생성된 jar 파일 app.jar로 복사
+COPY build/libs/*.jar bepo.jar
+# 8080 컨테이너 포트 노출
+EXPOSE 8080
+# jar 파일 실행
+ENTRYPOINT ["java","-jar","/bepo.jar"]
