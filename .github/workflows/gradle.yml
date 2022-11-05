@@ -50,6 +50,6 @@ jobs:
 #          password: ${{ secrets.DOCKER_PASSWORD }}
 
       ## 도커 컨테이너 실행
-      - name: docker run
-        run: docker run --name bepo-test -p 9090:9090 roomdoor/test-bepo-test
+#      - name: docker run
+#        run: docker run --name bepo-test -p 8080:8080 roomdoor/test-bepo-test
 
