@@ -32,12 +32,12 @@ jobs:
           echo "${{ secrets.DB }}" >> ./db-connection.yml
         shell: bash
 
-      ## gradle build  -> Dockerfile 에서 진행
-      ##  - name: Build with Gradle
-      ##  run: ./gradlew bootJar
+      # gradle build  -> Dockerfile 에서 진행
+      - name: Build with Gradle
+        run: ./gradlew bootJar
 
         ## gradle build and docker image 빌드 및 도커허브에 push
-      - name: web docker build and push
+      - name: docker build and push
         run: |
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t roomdoor/bepo-test .
