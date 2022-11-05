@@ -42,14 +42,20 @@ jobs:
           docker login -u ${{ secrets.DOCKER_USERNAME }} -p ${{ secrets.DOCKER_PASSWORD }}
           docker build -t roomdoor/bepo-test .
           docker push roomdoor/bepo-test
-#        uses: mr-smithers-excellent/docker-build-push@v5
-#        with:
-#          image: roomdoor/bepo-test
-#          registry: docker.io
-#          username: ${{ secrets.DOCKER_USERNAME }}
-#          password: ${{ secrets.DOCKER_PASSWORD }}
 
-      ## 도커 컨테이너 실행
-#      - name: docker run
-#        run: docker run --name bepo-test -p 8080:8080 roomdoor/test-bepo-test
-
+#   배포 Job
+  deploy:
+    needs: build  # build 후에 실행되도록 정의
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+      - name: executing remote ssh commands using password
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.HOST }}
+          username: ubuntu
+          key: ${{ secrets.KEY }}
+          script: |
+            sudo docker rm -f $(docker ps -qa)
+            sudo docker pull roomdoor/bepo-test
+            sudo docker run --name bepo-test -p 8080:8080 roomdoor/bepo-test
