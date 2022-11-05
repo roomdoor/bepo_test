@@ -36,8 +36,10 @@ jobs:
     ## gradle build  -> Dockerfile 에서 진행
     ##  - name: Build with Gradle
     ##  run: ./gradlew bootJar
-      
-    ## gradle build and docker image 빌드 및 도커허브에 push
+
+dockerImage:
+  needs: build
+      ## gradle build and docker image 빌드 및 도커허브에 push
     - name: gradle build and build and push docker image
       uses: mr-smithers-excellent/docker-build-push@v5
       with:
@@ -46,6 +48,8 @@ jobs:
         username: ${{ secrets.DOCKER_USERNAME }}
         password: ${{ secrets.DOCKER_PASSWORD }}
 
+deploy:
+  needs: dockerImage
     ## 도커 컨테이너 실행
     - name: docker run
       run: docker run --name bepo-test -p 9090:9090 roomdoor/test-bepo-test
