@@ -15,7 +15,6 @@ RUN chmod +x ./gradlew
 # jar 파일 생성
 RUN ./gradlew bootJar
 
-
 FROM openjdk:11-jre-slim
 COPY build/libs/*.jar bepoTest.jar
 ENTRYPOINT ["java","-jar","bepoTest.jar"]
