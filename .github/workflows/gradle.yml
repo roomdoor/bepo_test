@@ -58,5 +58,4 @@ jobs:
           script: |
             sudo docker rm -f $(docker ps -qa)
             sudo docker pull roomdoor/bepo-test:latest
-            sudo docker run --name bepo-test -p 8080:8080 roomdoor/bepo-test:latest
-          shell: bash
+            sudo docker run -d --name bepo-test -p 8080:8080 roomdoor/bepo-test:latest
