@@ -10,8 +10,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 !**/src/main/**/build/
 !**/src/test/**/build/
-/src/main/resources/my-application.yml
-/src/test/resources/application.yml
+/src/main/resources/text.yml
 /dbConfig/**
 ### STS ###
 .apt_generated
